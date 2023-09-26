@@ -12,7 +12,7 @@ class Line : public DrawableObject
 public:
     Line() = default;
     bool    isFinished(QPoint point) override;
-    void    draw(std::shared_ptr<QPainter> painter) override;
+    void    draw(QPainter& painter) override;
     QPoint* getStart();
     QPoint* getEnd();
 

@@ -16,23 +16,23 @@ bool Line::isFinished(QPoint point)
     return true;
 }
 
-void Line::draw(std::shared_ptr<QPainter> painter)
+void Line::draw(QPainter& painter)
 {
     if (points.empty())
     {
         if (start)
         {
-            painter->drawPoint(start->x(), start->y());
+            painter.drawPoint(start->x(), start->y());
         }
         if (end)
         {
-            painter->drawPoint(end->x(), end->y());
+            painter.drawPoint(end->x(), end->y());
         }
         return;
     }
     for (const auto& point : points)
     {
-        painter->drawPoint(point.x(), point.y());
+        painter.drawPoint(point.x(), point.y());
     }
 }
 

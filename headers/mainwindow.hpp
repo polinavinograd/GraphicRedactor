@@ -10,6 +10,7 @@
 #include <QPoint>
 #include <iostream>
 #include <memory>
+#include <qpixmap.h>
 #include <string>
 #include <vector>
 
@@ -34,8 +35,9 @@ private slots:
     void on_selectModeBox_activated(int index);
 
 private:
-    std::shared_ptr<Line>                        currentObject;
-    std::shared_ptr<QPainter>                    painter;
+    std::shared_ptr<Line> currentObject;
+    QPainter*             painter;
+    // QPixmap                                      pm;
     std::vector<std::shared_ptr<DrawableObject>> objs;
     std::shared_ptr<Mode>                        mode;
     Ui::MyGraphicRedactor*                       ui;
