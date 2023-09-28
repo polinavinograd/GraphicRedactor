@@ -1,47 +1,47 @@
 #include "../headers/Line.hpp"
 #include <qpoint.h>
 
-bool Line::isFinished(QPoint point)
+bool Line::tryFinish(QPoint point)
 {
-    if (!start)
-    {
-        start = &point;
-        return false;
-    }
-    if (!end)
-    {
-        end    = &point;
-        points = mode->calculatePoints();
-    }
-    return true;
+  if (!start)
+  {
+    start = &point;
+    return false;
+  }
+  if (!end)
+  {
+    end    = &point;
+    points = mode->calculatePoints();
+  }
+  return true;
 }
 
 void Line::draw(QPainter& painter)
 {
-    if (points.empty())
+  if (points.empty())
+  {
+    if (start)
     {
-        if (start)
-        {
-            painter.drawPoint(start->x(), start->y());
-        }
-        if (end)
-        {
-            painter.drawPoint(end->x(), end->y());
-        }
-        return;
+      painter.drawPoint(start->x(), start->y());
     }
-    for (const auto& point : points)
+    if (end)
     {
-        painter.drawPoint(point.x(), point.y());
+      painter.drawPoint(end->x(), end->y());
     }
+    return;
+  }
+  for (const auto& point : points)
+  {
+    painter.drawPoint(point.x(), point.y());
+  }
 }
 
 QPoint* Line::getStart()
 {
-    return start;
+  return start;
 }
 
 QPoint* Line::getEnd()
 {
-    return end;
+  return end;
 }

@@ -9,12 +9,13 @@
 
 class DrawableObject
 {
-public:
-    DrawableObject()                      = default;
-    virtual void draw(QPainter& painter)  = 0;
-    virtual bool isFinished(QPoint point) = 0;
+  public:
+  DrawableObject()                     = default;
+  virtual void draw(QPainter& painter) = 0;
+  virtual bool tryFinish(QPoint point) = 0;
+  void         setMode(std::shared_ptr<Mode> mode);
 
-protected:
-    std::shared_ptr<Mode> mode;
-    std::vector<QPoint>   points;
+  protected:
+  std::shared_ptr<Mode> mode;
+  std::vector<QPoint>   points;
 };

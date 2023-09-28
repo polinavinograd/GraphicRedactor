@@ -1,4 +1,9 @@
 #include "../headers/DrawableObject.hpp"
+
+void DrawableObject::setMode(std::shared_ptr<Mode> mode)
+{
+  this->mode = mode;
+}
 /*
 void DrawableObject::draw(QPainter& painter)
 {

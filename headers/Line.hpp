@@ -4,19 +4,18 @@
 
 #include <QPainter>
 #include <QPoint>
-#include <qpoint.h>
 #include <vector>
 
 class Line : public DrawableObject
 {
-public:
-    Line() = default;
-    bool    isFinished(QPoint point) override;
-    void    draw(QPainter& painter) override;
-    QPoint* getStart();
-    QPoint* getEnd();
+  public:
+  Line() = default;
+  bool    tryFinish(QPoint point) override;
+  void    draw(QPainter& painter) override;
+  QPoint* getStart();
+  QPoint* getEnd();
 
-private:
-    QPoint* start = nullptr;
-    QPoint* end   = nullptr;
+  private:
+  QPoint* start = nullptr;
+  QPoint* end   = nullptr;
 };
