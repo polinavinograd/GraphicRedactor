@@ -1,18 +1,11 @@
 #include "../headers/mainwindow.hpp"
 #include "./ui_mainwindow.h"
-// #include <qpainter.h>
 
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent)
     , ui(new Ui::MyGraphicRedactor)
-    , pm(800, 600)
 {
   ui->setupUi(this);
-
-  pm.fill();
-  painter = new QPainter(&pm);
-
-  // painter = new QPainter(this);
 }
 
 void MainWindow::mousePressEvent(QMouseEvent* event)
@@ -38,26 +31,22 @@ void MainWindow::mousePressEvent(QMouseEvent* event)
 
 void MainWindow::paintEvent(QPaintEvent* event)
 {
-  // if (!painter)
-  // {
-  //     painter = new QPainter(this);
-  // }
-  // painter.drawPoint(100, 100);
-
-  painter->begin(this);
-  painter->drawPixmap(0, 0, 800, 600, pm);
+  QPainter painter(this);
+  // QPen     linepen(Qt::red);
+  // linepen.setCapStyle(Qt::RoundCap);
+  // linepen.setWidth(30);
+  // painter.setRenderHint(QPainter::Antialiasing, true);
+  // painter.setPen(linepen);
 
   for (auto& obj : objs)
   {
-    obj->draw(*painter);
+    obj->draw(painter);
   }
-  painter->end();
 }
 
 MainWindow::~MainWindow()
 {
   delete ui;
-  delete painter;
 }
 
 void MainWindow::on_selectModeBox_activated(int index)

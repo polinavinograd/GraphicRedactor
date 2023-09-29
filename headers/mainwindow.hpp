@@ -10,7 +10,6 @@
 #include <QPoint>
 #include <iostream>
 #include <memory>
-#include <qpixmap.h>
 #include <string>
 #include <vector>
 
@@ -23,23 +22,21 @@ QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow
 {
-    Q_OBJECT
+  Q_OBJECT
 
-public:
-    MainWindow(QWidget* parent = nullptr);
-    void mousePressEvent(QMouseEvent* event) override;
-    void paintEvent(QPaintEvent* event) override;
-    ~MainWindow();
+  public:
+  MainWindow(QWidget* parent = nullptr);
+  void mousePressEvent(QMouseEvent* event) override;
+  void paintEvent(QPaintEvent* event) override;
+  ~MainWindow();
 
-private slots:
-    void on_selectModeBox_activated(int index);
+  private slots:
+  void on_selectModeBox_activated(int index);
 
-private:
-    std::shared_ptr<Line>                        currentObject;
-    QPainter*                                    painter;
-    QPixmap                                      pm;
-    std::vector<std::shared_ptr<DrawableObject>> objs;
-    std::shared_ptr<Mode>                        mode;
-    Ui::MyGraphicRedactor*                       ui;
+  private:
+  std::shared_ptr<Line>                        currentObject;
+  std::vector<std::shared_ptr<DrawableObject>> objs;
+  std::shared_ptr<Mode>                        mode;
+  Ui::MyGraphicRedactor*                       ui;
 };
 #endif // MAINWINDOW_HPP

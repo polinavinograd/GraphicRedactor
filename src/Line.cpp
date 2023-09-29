@@ -1,16 +1,15 @@
 #include "../headers/Line.hpp"
-#include <qpoint.h>
 
 bool Line::tryFinish(QPoint point)
 {
   if (!start)
   {
-    start = &point;
+    start = new QPoint(point);
     return false;
   }
   if (!end)
   {
-    end    = &point;
+    end    = new QPoint(point);
     points = mode->calculatePoints();
   }
   return true;
