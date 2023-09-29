@@ -2,27 +2,35 @@
 
 std::vector<QPoint> BrazenhemLinesMode::calculatePoints()
 {
-    std::vector<QPoint> result;
+  int x1 = line->getStart()->x();
+  int x2 = line->getEnd()->x();
+  int y1 = line->getStart()->y();
+  int y2 = line->getEnd()->y();
 
-    int x = line->getStart()->x();
-    int y = line->getStart()->y();
+  std::vector<QPoint> result;
 
-    int dx = line->getEnd()->x() - x;
-    int dy = line->getEnd()->y() - y;
+  const int deltaX = abs(x2 - x1);
+  const int deltaY = abs(y2 - y1);
+  const int signX  = x1 < x2 ? 1 : -1;
+  const int signY  = y1 < y2 ? 1 : -1;
+  int       error  = deltaX - deltaY;
+  result.emplace_back(x2, y2);
 
-    float error = 2 * dy - dx;
-
-    for (int i = 1; i <= dx; i++)
+  while (x1 != x2 || y1 != y2)
+  {
+    result.emplace_back(x1, y1);
+    int error2 = error * 2;
+    if (error2 > -deltaY)
     {
-        if (error >= 0)
-        {
-            y -= 1;
-            error -= 2 * dx;
-        }
-        x += 1;
-        error += 2 * dy;
-        result.emplace_back(QPoint(x, y));
+      error -= deltaY;
+      x1 += signX;
     }
+    if (error2 < deltaX)
+    {
+      error += deltaX;
+      y1 += signY;
+    }
+  }
 
-    return result;
+  return result;
 }
