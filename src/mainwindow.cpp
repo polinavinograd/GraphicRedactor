@@ -65,10 +65,11 @@ void MainWindow::on_selectModeBox_activated(int index)
       currentObject->setMode(mode);
       objs.emplace_back(currentObject);
       break;
-      /*case 2:
-          currentObject = std::make_shared<Line>();
-          mode          = std::make_shared<WuMode>(currentObject);
-          objs.emplace_back(currentObject);
-          break;*/
+    case 2:
+      currentObject = std::make_shared<Line>();
+      mode          = std::make_shared<WuMode>(currentObject);
+      currentObject->setMode(mode);
+      objs.emplace_back(currentObject);
+      break;
   }
 }

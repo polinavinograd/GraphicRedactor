@@ -2,4 +2,4 @@
 
 #include "BrazenhemLinesMode.hpp"
 #include "DDAMode.hpp"
-// #include "WuMode.hpp"
+#include "WuMode.hpp"
