@@ -6,11 +6,11 @@
 
 class BrazenhemLinesMode : public Mode
 {
-public:
-    BrazenhemLinesMode(std::shared_ptr<Line> currentLine)
-        : line(currentLine){};
-    std::vector<QPoint> calculatePoints() override;
+  public:
+  BrazenhemLinesMode(std::shared_ptr<Line> currentLine)
+      : line(currentLine){};
+  std::vector<QPoint> calculatePoints() override final;
 
-private:
-    std::shared_ptr<Line> line;
+  private:
+  std::shared_ptr<Line> line;
 };

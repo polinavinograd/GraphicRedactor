@@ -7,11 +7,11 @@
 
 class DDAMode : public Mode
 {
-public:
-    DDAMode(std::shared_ptr<Line> currentLine)
-        : line(currentLine){};
-    std::vector<QPoint> calculatePoints() override;
+  public:
+  DDAMode(std::shared_ptr<Line> currentLine)
+      : line(currentLine){};
+  std::vector<QPoint> calculatePoints() override final;
 
-private:
-    std::shared_ptr<Line> line;
+  private:
+  std::shared_ptr<Line> line;
 };
