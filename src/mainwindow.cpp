@@ -1,5 +1,6 @@
 #include "../headers/mainwindow.hpp"
 #include "./ui_mainwindow.h"
+#include <memory>
 
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent)
@@ -68,6 +69,30 @@ void MainWindow::on_selectModeBox_activated(int index)
     case 2:
       currentObject = std::make_shared<Line>();
       mode          = std::make_shared<WuMode>(currentObject);
+      currentObject->setMode(mode);
+      objs.emplace_back(currentObject);
+      break;
+    case 3:
+      currentObject = std::make_shared<Line>();
+      mode          = std::make_shared<CircleMode>(currentObject);
+      currentObject->setMode(mode);
+      objs.emplace_back(currentObject);
+      break;
+    case 4:
+      currentObject = std::make_shared<Line>();
+      mode          = std::make_shared<EllipseMode>(currentObject);
+      currentObject->setMode(mode);
+      objs.emplace_back(currentObject);
+      break;
+    case 5:
+      currentObject = std::make_shared<Line>();
+      mode          = std::make_shared<ParabolaMode>(currentObject);
+      currentObject->setMode(mode);
+      objs.emplace_back(currentObject);
+      break;
+    case 6:
+      currentObject = std::make_shared<Line>();
+      mode          = std::make_shared<HyperbolaMode>(currentObject);
       currentObject->setMode(mode);
       objs.emplace_back(currentObject);
       break;

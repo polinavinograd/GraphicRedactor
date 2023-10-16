@@ -120,6 +120,26 @@
       <string>Отрезок Ву</string>
      </property>
     </item>
+    <item>
+     <property name="text">
+      <string>Окружность</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Эллипс</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Парабола</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Гипербола</string>
+     </property>
+    </item>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
