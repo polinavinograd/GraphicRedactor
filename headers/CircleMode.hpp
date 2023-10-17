@@ -1,12 +1,14 @@
 #pragma once
 
 #include "Lines2Mode.hpp"
+#include <memory>
 
 class CircleMode : public Lines2Mode
 {
   public:
-  CircleMode(std::shared_ptr<Line> currentLine)
-      : line(currentLine){};
+  CircleMode(std::shared_ptr<Line>       currentLine,
+             std::shared_ptr<MainWindow> newWindow)
+      : Lines2Mode(currentLine, newWindow){};
 
   protected:
   void initializeLine() override final;
@@ -17,6 +19,5 @@ class CircleMode : public Lines2Mode
   int countStartError() override;
 
   private:
-  int                   radius;
-  std::shared_ptr<Line> line;
+  int radius;
 };

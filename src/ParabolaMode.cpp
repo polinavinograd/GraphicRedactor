@@ -1,13 +1,14 @@
 #include "../headers/ParabolaMode.hpp"
+#include <cmath>
 
 void ParabolaMode::initializeLine()
 {
-  // add p-init
+  p = std::abs(line->getStart()->x() - line->getEnd()->x());
 }
 
 int ParabolaMode::countStartError()
 {
-  // add start-error and start-point
+  return 1 - std::pow(p, 2) - 2 * p;
 }
 
 int ParabolaMode::countHorizontalError(int x, int error)

@@ -1,4 +1,17 @@
 #include "../headers/Lines2Mode.hpp"
+#include "../headers/mainwindow.hpp"
+#include <algorithm>
+#include <qpoint.h>
+
+bool Lines2Mode::stopCondition(int x, int y)
+{
+  int limitX =
+      std::max(line->getStart()->x(), window->width() - line->getStart()->x());
+  int limitY =
+      std::max(line->getStart()->y(), window->height() - line->getStart()->y());
+
+  return x > limitX || y > limitY;
+}
 
 std::vector<QPoint> Lines2Mode::calculatePoints()
 {
@@ -10,9 +23,9 @@ std::vector<QPoint> Lines2Mode::calculatePoints()
   int y = line->getStart()->y();
 
   int error = countStartError();
-  while (...) // add stop-condition
+  while (!stopCondition(x, y))
   {
-    // add mirrored points
+    result.emplace_back(QPoint(x, y));
     if (error < 0)
     {
       if (std::abs(countHorizontalError(x, error)) -
@@ -55,5 +68,5 @@ std::vector<QPoint> Lines2Mode::calculatePoints()
       continue;
     }
   }
-  // add mirrored points
+  return result;
 }

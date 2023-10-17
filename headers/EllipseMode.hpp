@@ -5,8 +5,9 @@
 class EllipseMode : public Lines2Mode
 {
   public:
-  EllipseMode(std::shared_ptr<Line> currentLine)
-      : line(currentLine){};
+  EllipseMode(std::shared_ptr<Line>       currentLine,
+              std::shared_ptr<MainWindow> newWindow)
+      : Lines2Mode(currentLine, newWindow){};
 
   protected:
   void initializeLine() override final;
@@ -17,7 +18,6 @@ class EllipseMode : public Lines2Mode
   int countStartError() override;
 
   private:
-  int                   a;
-  int                   b;
-  std::shared_ptr<Line> line;
+  int a;
+  int b;
 };

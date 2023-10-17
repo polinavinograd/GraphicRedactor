@@ -1,4 +1,5 @@
 #include "../headers/DDAMode.hpp"
+#include "../headers/mainwindow.hpp"
 
 int sign(float number)
 {

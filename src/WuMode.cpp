@@ -1,4 +1,5 @@
 #include "../headers/WuMode.hpp"
+#include "../headers/mainwindow.hpp"
 
 int ipart(float x)
 {

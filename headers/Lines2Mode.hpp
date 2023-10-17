@@ -5,9 +5,21 @@
 
 #include <cmath>
 
+class MainWindow;
+
 class Lines2Mode : public Mode
 {
+  public:
+  Lines2Mode() = default;
+  Lines2Mode(std::shared_ptr<Line>       currentLine,
+             std::shared_ptr<MainWindow> newWindow)
+      : line(currentLine)
+      , window(newWindow){};
+
   protected:
+  std::shared_ptr<MainWindow> window;
+  std::shared_ptr<Line>       line;
+
   std::vector<QPoint> calculatePoints() override;
 
   virtual void initializeLine() = 0;
@@ -17,6 +29,5 @@ class Lines2Mode : public Mode
   virtual int countVerticalError(int y, int error)        = 0;
   virtual int countDiagonalError(int x, int y, int error) = 0;
 
-  private:
-  std::shared_ptr<Line> line;
+  bool stopCondition(int x, int y);
 };

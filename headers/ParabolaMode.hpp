@@ -5,8 +5,9 @@
 class ParabolaMode : public Lines2Mode
 {
   public:
-  ParabolaMode(std::shared_ptr<Line> currentLine)
-      : line(currentLine){};
+  ParabolaMode(std::shared_ptr<Line>       currentLine,
+               std::shared_ptr<MainWindow> newWindow)
+      : Lines2Mode(currentLine, newWindow){};
 
   protected:
   void initializeLine() override final;
@@ -17,6 +18,5 @@ class ParabolaMode : public Lines2Mode
   int countStartError() override;
 
   private:
-  int                   p;
-  std::shared_ptr<Line> line;
+  int p;
 };

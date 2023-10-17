@@ -1,4 +1,5 @@
 #include "../headers/BrazenhemLinesMode.hpp"
+#include "../headers/mainwindow.hpp"
 
 std::vector<QPoint> BrazenhemLinesMode::calculatePoints()
 {
