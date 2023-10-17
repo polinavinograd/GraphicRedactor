@@ -35,3 +35,13 @@ int EllipseMode::getStartY()
 {
   return b;
 }
+
+bool EllipseMode::stopCondition(int x, int y)
+{
+  return x > a && y < 0;
+}
+
+int EllipseMode::deltaY() const
+{
+  return -1;
+}

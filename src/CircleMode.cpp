@@ -36,3 +36,13 @@ int CircleMode::getStartY()
 {
   return radius;
 }
+
+bool CircleMode::stopCondition(int x, int y)
+{
+  return x > radius && y < 0;
+}
+
+int CircleMode::deltaY() const
+{
+  return -1;
+}

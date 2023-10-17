@@ -20,6 +20,10 @@ class EllipseMode : public Lines2Mode
   int getStartX() override final;
   int getStartY() override final;
 
+  int deltaY() const final;
+
+  bool stopCondition(int x, int y) override final;
+
   private:
   int a;
   int b;

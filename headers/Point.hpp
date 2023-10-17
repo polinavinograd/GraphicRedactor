@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QPoint>
+#include <memory>
 
 class Point : public QPoint
 {

@@ -17,6 +17,9 @@ class HyperbolaMode : public Lines2Mode
   int countDiagonalError(int x, int y, int error) override final;
   int countStartError() override;
 
+  bool isDiagonalOrHorizontal(int error) const final;
+  bool isDiagonalOrVertical(int error) const final;
+
   int getStartX() override final;
   int getStartY() override final;
 

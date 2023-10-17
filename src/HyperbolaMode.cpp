@@ -35,3 +35,13 @@ int HyperbolaMode::getStartY()
 {
   return b;
 }
+
+bool HyperbolaMode::isDiagonalOrHorizontal(int error) const
+{
+  return error > 0;
+}
+
+bool HyperbolaMode::isDiagonalOrVertical(int error) const
+{
+  return error < 0;
+}

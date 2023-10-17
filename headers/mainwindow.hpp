@@ -33,6 +33,8 @@ class MainWindow : public QMainWindow
   private slots:
   void on_selectModeBox_activated(int index);
 
+      void on_clearBtn_clicked();
+
   private:
   std::shared_ptr<Line>                        currentObject;
   std::vector<std::shared_ptr<DrawableObject>> objs;

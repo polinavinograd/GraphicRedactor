@@ -12,6 +12,9 @@ class ParabolaMode : public Lines2Mode
   protected:
   void initializeLine() override final;
 
+  bool isDiagonalOrHorizontal(int error) const final;
+  bool isDiagonalOrVertical(int error) const final;
+
   int countHorizontalError(int x, int error) override final;
   int countVerticalError(int y, int error) override final;
   int countDiagonalError(int x, int y, int error) override final;
@@ -20,6 +23,9 @@ class ParabolaMode : public Lines2Mode
   int getStartX() override final;
   int getStartY() override final;
 
+  void addPoints(std::vector<Point>& points, int x, int y) const final;
+
   private:
-  int p;
+  bool isNegative = false;
+  int  p;
 };

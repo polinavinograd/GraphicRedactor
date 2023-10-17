@@ -2,6 +2,7 @@
 
 #include "Line.hpp"
 #include "Mode.hpp"
+#include "Point.hpp"
 
 #include <cmath>
 
@@ -20,6 +21,8 @@ class Lines2Mode : public Mode
   std::shared_ptr<MainWindow> window;
   std::shared_ptr<Line>       line;
 
+  Point zero;
+
   std::vector<Point> calculatePoints() override;
 
   virtual void initializeLine() = 0;
@@ -29,8 +32,16 @@ class Lines2Mode : public Mode
   virtual int countVerticalError(int y, int error)        = 0;
   virtual int countDiagonalError(int x, int y, int error) = 0;
 
+  virtual bool isDiagonalOrVertical(int error) const;
+  virtual bool isDiagonalOrHorizontal(int error) const;
+
+  virtual int deltaY() const;
+
   virtual int getStartX() = 0;
   virtual int getStartY() = 0;
 
-  bool stopCondition(int x, int y);
+  void         addPoint(std::vector<Point>& points, const Point& point) const;
+  virtual void addPoints(std::vector<Point>& points, int x, int y) const;
+
+  virtual bool stopCondition(int x, int y);
 };

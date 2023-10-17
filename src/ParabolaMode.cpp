@@ -3,7 +3,8 @@
 
 void ParabolaMode::initializeLine()
 {
-  p = std::abs(line->getStart()->x() - line->getEnd()->x());
+  isNegative = line->getEnd()->x() - line->getStart()->x() < 0;
+  p          = std::abs(line->getStart()->x() - line->getEnd()->x());
 }
 
 int ParabolaMode::countStartError()
@@ -28,10 +29,34 @@ int ParabolaMode::countDiagonalError(int x, int y, int error)
 
 int ParabolaMode::getStartX()
 {
-  return 0;
+  return p / 2;
 }
 
 int ParabolaMode::getStartY()
 {
-  return p / 2;
+  return 0;
+}
+
+void ParabolaMode::addPoints(std::vector<Point>& points, int x, int y) const
+{
+  if (isNegative)
+  {
+    addPoint(points, Point(-x, -y).toScreenPoint(zero));
+    addPoint(points, Point(-x, y).toScreenPoint(zero));
+  }
+  else
+  {
+    addPoint(points, Point(x, y).toScreenPoint(zero));
+    addPoint(points, Point(x, -y).toScreenPoint(zero));
+  }
+}
+
+bool ParabolaMode::isDiagonalOrHorizontal(int error) const
+{
+  return error > 0;
+}
+
+bool ParabolaMode::isDiagonalOrVertical(int error) const
+{
+  return error < 0;
 }

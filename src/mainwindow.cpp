@@ -105,3 +105,9 @@ void MainWindow::on_selectModeBox_activated(int index)
       break;
   }
 }
+
+void MainWindow::on_clearBtn_clicked()
+{
+  objs.clear();
+  update();
+}
