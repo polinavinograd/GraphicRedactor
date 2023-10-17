@@ -1,11 +1,11 @@
 #pragma once
 
-#include <QPoint>
+#include "Point.hpp"
 #include <memory>
 #include <vector>
 
 class Mode
 {
   public:
-  virtual std::vector<QPoint> calculatePoints() = 0;
+  virtual std::vector<Point> calculatePoints() = 0;
 };

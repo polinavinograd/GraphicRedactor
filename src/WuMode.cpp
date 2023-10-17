@@ -11,9 +11,9 @@ float fpart(float x)
   return x - ipart(x);
 }
 
-std::vector<QPoint> WuMode::calculatePoints()
+std::vector<Point> WuMode::calculatePoints()
 {
-  std::vector<QPoint> result;
+  std::vector<Point> result;
 
   float x1 = line->getStart()->x();
   float x2 = line->getEnd()->x();
@@ -68,17 +68,17 @@ std::vector<QPoint> WuMode::calculatePoints()
   return result;
 }
 
-void WuMode::addPoint(std::vector<QPoint>& points,
-                      int                  x,
-                      int                  y,
-                      bool                 inverted) const
+void WuMode::addPoint(std::vector<Point>& points,
+                      int                 x,
+                      int                 y,
+                      bool                inverted) const
 {
   if (inverted)
   {
-    points.emplace_back(QPoint(y, x));
+    points.emplace_back(Point(y, x));
   }
   else
   {
-    points.emplace_back(QPoint(x, y));
+    points.emplace_back(Point(x, y));
   }
 }

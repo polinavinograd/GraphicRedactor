@@ -8,21 +8,30 @@ void HyperbolaMode::initializeLine()
 
 int HyperbolaMode::countStartError()
 {
-  return std::pow(b, 2) - std::pow(a, 2) + 2 * std::pow(a, 2) * b -
-         2 * std::pow(a, 2) * std::pow(b, 2);
+  return std::pow(a, 2) - std::pow(b, 2) + 2 * b * std::pow(a, 2);
 }
 
 int HyperbolaMode::countHorizontalError(int x, int error)
 {
-  return error + std::pow(b, 2) * (2 * x + 1);
+  return error - std::pow(b, 2) * (2 * x + 1);
 }
 
 int HyperbolaMode::countVerticalError(int y, int error)
 {
-  return error - std::pow(a, 2) * (2 * y - 1);
+  return error + std::pow(a, 2) * (2 * y + 1);
 }
 
 int HyperbolaMode::countDiagonalError(int x, int y, int error)
 {
-  return error + std::pow(b, 2) * (2 * x + 1) - std::pow(a, 2) * (1 - 2 * y);
+  return error - std::pow(b, 2) * (2 * x + 1) + std::pow(a, 2) * (2 * y + 1);
+}
+
+int HyperbolaMode::getStartX()
+{
+  return 0;
+}
+
+int HyperbolaMode::getStartY()
+{
+  return b;
 }

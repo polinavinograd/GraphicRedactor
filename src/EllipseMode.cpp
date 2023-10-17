@@ -25,3 +25,13 @@ int EllipseMode::countDiagonalError(int x, int y, int error)
 {
   return error + std::pow(b, 2) * (2 * x + 1) + std::pow(a, 2) * (1 - 2 * y);
 }
+
+int EllipseMode::getStartX()
+{
+  return 0;
+}
+
+int EllipseMode::getStartY()
+{
+  return b;
+}

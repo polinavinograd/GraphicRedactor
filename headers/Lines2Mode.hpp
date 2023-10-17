@@ -20,7 +20,7 @@ class Lines2Mode : public Mode
   std::shared_ptr<MainWindow> window;
   std::shared_ptr<Line>       line;
 
-  std::vector<QPoint> calculatePoints() override;
+  std::vector<Point> calculatePoints() override;
 
   virtual void initializeLine() = 0;
 
@@ -28,6 +28,9 @@ class Lines2Mode : public Mode
   virtual int countHorizontalError(int x, int error)      = 0;
   virtual int countVerticalError(int y, int error)        = 0;
   virtual int countDiagonalError(int x, int y, int error) = 0;
+
+  virtual int getStartX() = 0;
+  virtual int getStartY() = 0;
 
   bool stopCondition(int x, int y);
 };

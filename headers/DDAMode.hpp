@@ -15,7 +15,7 @@ class DDAMode : public Mode
           std::shared_ptr<MainWindow> newWindow)
       : line(currentLine)
       , window(newWindow){};
-  std::vector<QPoint> calculatePoints() override;
+  std::vector<Point> calculatePoints() override;
 
   private:
   std::shared_ptr<Line>       line;

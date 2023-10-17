@@ -2,20 +2,21 @@
 
 #include "DrawableObject.hpp"
 
+#include "Point.hpp"
 #include <QPainter>
-#include <QPoint>
+#include <memory>
 #include <vector>
 
 class Line : public DrawableObject
 {
   public:
   Line() = default;
-  bool    tryFinish(QPoint point) override;
-  void    draw(QPainter& painter) override;
-  QPoint* getStart();
-  QPoint* getEnd();
+  bool                   tryFinish(Point point) override;
+  void                   draw(QPainter& painter) override;
+  std::shared_ptr<Point> getStart();
+  std::shared_ptr<Point> getEnd();
 
   private:
-  QPoint* start = nullptr;
-  QPoint* end   = nullptr;
+  std::shared_ptr<Point> start = nullptr;
+  std::shared_ptr<Point> end   = nullptr;
 };

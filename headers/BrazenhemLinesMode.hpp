@@ -2,6 +2,7 @@
 
 #include "Line.hpp"
 #include "Mode.hpp"
+#include "Point.hpp"
 #include <memory>
 
 class MainWindow;
@@ -13,7 +14,7 @@ class BrazenhemLinesMode : public Mode
                      std::shared_ptr<MainWindow> newWindow)
       : line(currentLine)
       , window(newWindow){};
-  std::vector<QPoint> calculatePoints() override final;
+  std::vector<Point> calculatePoints() override final;
 
   private:
   std::shared_ptr<Line>       line;

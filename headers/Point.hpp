@@ -1,16 +1,22 @@
 #pragma once
 
-#include "QPoint"
+#include <QPoint>
 
 class Point : public QPoint
 {
-public:
-    Point() = default;
-    Point(int x, int y);
+  public:
+  Point() = default;
+  Point(int x, int y);
+  Point(QPoint point);
 
-private:
-    int    x        = 0;
-    int    y        = 0;
-    int    z        = 0;
-    double rotation = 0;
+  Point& toScreenPoint(const Point& zeroPoint);
+
+  int x() const;
+  int y() const;
+
+  private:
+  int    x_pos    = 0;
+  int    y_pos    = 0;
+  int    z_pos    = 0;
+  double rotation = 0;
 };

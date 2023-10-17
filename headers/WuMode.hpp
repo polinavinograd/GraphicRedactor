@@ -14,8 +14,8 @@ class WuMode : public Mode
          std::shared_ptr<MainWindow> newWindow)
       : line(currentLine)
       , window(newWindow){};
-  std::vector<QPoint> calculatePoints() override final;
-  void addPoint(std::vector<QPoint>& points, int x, int y, bool inverted) const;
+  std::vector<Point> calculatePoints() override final;
+  void addPoint(std::vector<Point>& points, int x, int y, bool inverted) const;
 
   private:
   std::shared_ptr<Line>       line;

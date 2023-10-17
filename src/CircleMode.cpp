@@ -26,3 +26,13 @@ int CircleMode::countDiagonalError(int x, int y, int error)
 {
   return error + 2 * (x - y + 1);
 }
+
+int CircleMode::getStartX()
+{
+  return 0;
+}
+
+int CircleMode::getStartY()
+{
+  return radius;
+}

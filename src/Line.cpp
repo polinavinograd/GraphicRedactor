@@ -1,15 +1,16 @@
 #include "../headers/Line.hpp"
+#include <memory>
 
-bool Line::tryFinish(QPoint point)
+bool Line::tryFinish(Point point)
 {
   if (!start)
   {
-    start = new QPoint(point);
+    start = std::make_shared<Point>(point);
     return false;
   }
   if (!end)
   {
-    end    = new QPoint(point);
+    end    = std::make_shared<Point>(point);
     points = mode->calculatePoints();
   }
   return true;
@@ -35,12 +36,12 @@ void Line::draw(QPainter& painter)
   }
 }
 
-QPoint* Line::getStart()
+std::shared_ptr<Point> Line::getStart()
 {
   return start;
 }
 
-QPoint* Line::getEnd()
+std::shared_ptr<Point> Line::getEnd()
 {
   return end;
 }

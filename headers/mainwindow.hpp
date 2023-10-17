@@ -4,10 +4,10 @@
 #include "DrawableObject.hpp"
 #include "Line.hpp"
 #include "Modes.hpp"
+#include "Point.hpp"
 #include <QMainWindow>
 #include <QMouseEvent>
 #include <QPainter>
-#include <QPoint>
 #include <iostream>
 #include <memory>
 #include <string>

@@ -8,7 +8,7 @@ void ParabolaMode::initializeLine()
 
 int ParabolaMode::countStartError()
 {
-  return 1 - std::pow(p, 2) - 2 * p;
+  return -2 * p + 1;
 }
 
 int ParabolaMode::countHorizontalError(int x, int error)
@@ -18,10 +18,20 @@ int ParabolaMode::countHorizontalError(int x, int error)
 
 int ParabolaMode::countVerticalError(int y, int error)
 {
-  return error + 1 - 2 * y;
+  return error + 2 * y + 1;
 }
 
 int ParabolaMode::countDiagonalError(int x, int y, int error)
 {
-  return error - 2 * y + 1 - 2 * p;
+  return error + 2 * y + 1 - 2 * p;
+}
+
+int ParabolaMode::getStartX()
+{
+  return 0;
+}
+
+int ParabolaMode::getStartY()
+{
+  return p / 2;
 }

@@ -9,9 +9,9 @@ int sign(float number)
     return (number > 0) ? 1 : -1;
 }
 
-std::vector<QPoint> DDAMode::calculatePoints()
+std::vector<Point> DDAMode::calculatePoints()
 {
-  std::vector<QPoint> result;
+  std::vector<Point> result;
 
   int deltaX = line->getEnd()->x() - line->getStart()->x();
   int deltaY = line->getEnd()->y() - line->getStart()->y();
@@ -35,7 +35,7 @@ std::vector<QPoint> DDAMode::calculatePoints()
   {
     x += dx;
     y += dy;
-    result.emplace_back(QPoint(round(x), round(y)));
+    result.emplace_back(Point(round(x), round(y)));
   }
 
   return result;

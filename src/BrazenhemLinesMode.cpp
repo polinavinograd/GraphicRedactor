@@ -1,14 +1,14 @@
 #include "../headers/BrazenhemLinesMode.hpp"
 #include "../headers/mainwindow.hpp"
 
-std::vector<QPoint> BrazenhemLinesMode::calculatePoints()
+std::vector<Point> BrazenhemLinesMode::calculatePoints()
 {
   int x1 = line->getStart()->x();
   int x2 = line->getEnd()->x();
   int y1 = line->getStart()->y();
   int y2 = line->getEnd()->y();
 
-  std::vector<QPoint> result;
+  std::vector<Point> result;
 
   const int deltaX = abs(x2 - x1);
   const int deltaY = abs(y2 - y1);

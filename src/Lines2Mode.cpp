@@ -1,7 +1,7 @@
 #include "../headers/Lines2Mode.hpp"
+#include "../headers/Point.hpp"
 #include "../headers/mainwindow.hpp"
 #include <algorithm>
-#include <qpoint.h>
 
 bool Lines2Mode::stopCondition(int x, int y)
 {
@@ -13,19 +13,19 @@ bool Lines2Mode::stopCondition(int x, int y)
   return x > limitX || y > limitY;
 }
 
-std::vector<QPoint> Lines2Mode::calculatePoints()
+std::vector<Point> Lines2Mode::calculatePoints()
 {
   initializeLine();
 
-  std::vector<QPoint> result;
+  std::vector<Point> result;
 
-  int x = line->getStart()->x();
-  int y = line->getStart()->y();
+  int x = getStartX();
+  int y = getStartY();
 
   int error = countStartError();
   while (!stopCondition(x, y))
   {
-    result.emplace_back(QPoint(x, y));
+    result.emplace_back(Point(x, y));
     if (error < 0)
     {
       if (std::abs(countHorizontalError(x, error)) -
