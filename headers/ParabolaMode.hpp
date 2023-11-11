@@ -1,12 +1,13 @@
 #pragma once
 
+#include "DrawableObject.hpp"
 #include "Lines2Mode.hpp"
 
 class ParabolaMode : public Lines2Mode
 {
   public:
-  ParabolaMode(std::shared_ptr<Line>       currentLine,
-               std::shared_ptr<MainWindow> newWindow)
+  ParabolaMode(std::shared_ptr<DrawableObject> currentLine,
+               std::shared_ptr<MainWindow>     newWindow)
       : Lines2Mode(currentLine, newWindow){};
 
   protected:

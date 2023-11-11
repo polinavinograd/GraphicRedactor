@@ -140,6 +140,21 @@
       <string>Гипербола</string>
      </property>
     </item>
+    <item>
+     <property name="text">
+      <string>Кривая Эрмита</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Кривая Безье</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>В-сплайн</string>
+     </property>
+    </item>
    </widget>
    <widget class="QPushButton" name="clearBtn">
     <property name="geometry">

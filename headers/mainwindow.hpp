@@ -10,6 +10,7 @@
 #include <QPainter>
 #include <iostream>
 #include <memory>
+#include <qevent.h>
 #include <string>
 #include <vector>
 
@@ -27,16 +28,17 @@ class MainWindow : public QMainWindow
   public:
   MainWindow(QWidget* parent = nullptr);
   void mousePressEvent(QMouseEvent* event) override;
+  void keyPressEvent(QKeyEvent* event) override;
   void paintEvent(QPaintEvent* event) override;
   ~MainWindow();
 
   private slots:
   void on_selectModeBox_activated(int index);
 
-      void on_clearBtn_clicked();
+  void on_clearBtn_clicked();
 
   private:
-  std::shared_ptr<Line>                        currentObject;
+  std::shared_ptr<DrawableObject>              currentObject;
   std::vector<std::shared_ptr<DrawableObject>> objs;
   std::shared_ptr<Mode>                        mode;
   Ui::MyGraphicRedactor*                       ui;

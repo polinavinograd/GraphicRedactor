@@ -10,6 +10,8 @@ class Point : public QPoint
   Point(int x, int y);
   Point(QPoint point);
 
+  Point operator-(const Point& right);
+
   Point& toScreenPoint(const Point& zeroPoint);
 
   int x() const;

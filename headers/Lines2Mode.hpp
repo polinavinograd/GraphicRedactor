@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Line.hpp"
+#include "DrawableObject.hpp"
 #include "Mode.hpp"
 #include "Point.hpp"
 
@@ -12,14 +12,14 @@ class Lines2Mode : public Mode
 {
   public:
   Lines2Mode() = default;
-  Lines2Mode(std::shared_ptr<Line>       currentLine,
-             std::shared_ptr<MainWindow> newWindow)
+  Lines2Mode(std::shared_ptr<DrawableObject> currentLine,
+             std::shared_ptr<MainWindow>     newWindow)
       : line(currentLine)
       , window(newWindow){};
 
   protected:
-  std::shared_ptr<MainWindow> window;
-  std::shared_ptr<Line>       line;
+  std::shared_ptr<MainWindow>     window;
+  std::shared_ptr<DrawableObject> line;
 
   Point zero;
 

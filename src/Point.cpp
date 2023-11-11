@@ -23,3 +23,8 @@ int Point::y() const
 {
   return y_pos;
 }
+
+Point Point::operator-(const Point& right)
+{
+  return { x_pos - right.x_pos, y_pos - right.y_pos };
+}

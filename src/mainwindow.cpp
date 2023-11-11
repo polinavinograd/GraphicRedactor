@@ -1,6 +1,7 @@
 #include "../headers/mainwindow.hpp"
 #include "./ui_mainwindow.h"
 #include <memory>
+#include <qnamespace.h>
 
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent)
@@ -30,14 +31,25 @@ void MainWindow::mousePressEvent(QMouseEvent* event)
   }
 }
 
+void MainWindow::keyPressEvent(QKeyEvent* event)
+{
+  if (event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter)
+  {
+    if (std::dynamic_pointer_cast<VSplineMode>(mode))
+    {
+      currentObject->setFinished();
+    }
+  }
+}
+
 void MainWindow::paintEvent(QPaintEvent* event)
 {
   QPainter painter(this);
-  // QPen     linepen(Qt::red);
-  // linepen.setCapStyle(Qt::RoundCap);
-  // linepen.setWidth(30);
-  // painter.setRenderHint(QPainter::Antialiasing, true);
-  // painter.setPen(linepen);
+  QPen     linepen(Qt::red);
+  linepen.setCapStyle(Qt::RoundCap);
+  linepen.setWidth(10);
+  painter.setRenderHint(QPainter::Antialiasing, true);
+  painter.setPen(linepen);
 
   for (auto& obj : objs)
   {
@@ -100,6 +112,12 @@ void MainWindow::on_selectModeBox_activated(int index)
       currentObject = std::make_shared<Line>();
       mode          = std::make_shared<HyperbolaMode>(currentObject,
                                              std::shared_ptr<MainWindow>(this));
+      currentObject->setMode(mode);
+      objs.emplace_back(currentObject);
+      break;
+    case 7:
+      currentObject = std::make_shared<Curve>();
+      mode          = std::make_shared<HermiteMode>(currentObject);
       currentObject->setMode(mode);
       objs.emplace_back(currentObject);
       break;

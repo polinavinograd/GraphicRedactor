@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Line.hpp"
+#include "DrawableObject.hpp"
 #include "Mode.hpp"
 
 #include <cmath>
@@ -11,13 +11,13 @@ class MainWindow;
 class DDAMode : public Mode
 {
   public:
-  DDAMode(std::shared_ptr<Line>       currentLine,
-          std::shared_ptr<MainWindow> newWindow)
+  DDAMode(std::shared_ptr<DrawableObject> currentLine,
+          std::shared_ptr<MainWindow>     newWindow)
       : line(currentLine)
       , window(newWindow){};
   std::vector<Point> calculatePoints() override;
 
   private:
-  std::shared_ptr<Line>       line;
-  std::shared_ptr<MainWindow> window;
+  std::shared_ptr<DrawableObject> line;
+  std::shared_ptr<MainWindow>     window;
 };

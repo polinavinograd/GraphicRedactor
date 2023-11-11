@@ -1,17 +1,30 @@
 #pragma once
 
+#include "Point.hpp"
 #include <vector>
 
 class Matrix
 {
   public:
+  Matrix() = default;
   Matrix(int rows, int cols);
+  Matrix(std::vector<std::vector<double>> matrix);
+  Matrix(const std::vector<double>& data)
+      : data({ data })
+      , rows(1)
+      , cols(data.size())
+  {
+  }
+
   Matrix operator*(const Matrix& right) const;
   Matrix operator*(double number) const;
 
-  private:
-  int rows;
-  int cols;
+  Matrix                           transpose();
+  std::vector<std::vector<double>> getData();
 
-  std::vector<std::vector<int>> data;
+  private:
+  int rows = 0;
+  int cols = 0;
+
+  std::vector<std::vector<double>> data = {};
 };

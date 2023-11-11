@@ -8,3 +8,7 @@
 #include "EllipseMode.hpp"
 #include "HyperbolaMode.hpp"
 #include "ParabolaMode.hpp"
+
+#include "BezierMode.hpp"
+#include "HermiteMode.hpp"
+#include "VSplineMode.hpp"

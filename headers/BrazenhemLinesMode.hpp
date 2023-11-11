@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Line.hpp"
+#include "DrawableObject.hpp"
 #include "Mode.hpp"
 #include "Point.hpp"
 #include <memory>
@@ -10,13 +10,13 @@ class MainWindow;
 class BrazenhemLinesMode : public Mode
 {
   public:
-  BrazenhemLinesMode(std::shared_ptr<Line>       currentLine,
-                     std::shared_ptr<MainWindow> newWindow)
+  BrazenhemLinesMode(std::shared_ptr<DrawableObject> currentLine,
+                     std::shared_ptr<MainWindow>     newWindow)
       : line(currentLine)
       , window(newWindow){};
   std::vector<Point> calculatePoints() override final;
 
   private:
-  std::shared_ptr<Line>       line;
-  std::shared_ptr<MainWindow> window;
+  std::shared_ptr<DrawableObject> line;
+  std::shared_ptr<MainWindow>     window;
 };
