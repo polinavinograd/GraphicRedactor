@@ -27,6 +27,13 @@ Matrix::Matrix(std::vector<std::vector<double>> matrix)
   }
 }
 
+Matrix::Matrix(const std::vector<double>& data)
+    : data({ data })
+    , rows(1)
+    , cols(data.size())
+{
+}
+
 Matrix Matrix::operator*(const Matrix& right) const
 {
   if (cols != right.rows)

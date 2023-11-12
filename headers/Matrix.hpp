@@ -9,12 +9,7 @@ class Matrix
   Matrix() = default;
   Matrix(int rows, int cols);
   Matrix(std::vector<std::vector<double>> matrix);
-  Matrix(const std::vector<double>& data)
-      : data({ data })
-      , rows(1)
-      , cols(data.size())
-  {
-  }
+  Matrix(const std::vector<double>& data);
 
   Matrix operator*(const Matrix& right) const;
   Matrix operator*(double number) const;
