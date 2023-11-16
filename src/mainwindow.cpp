@@ -121,18 +121,6 @@ void MainWindow::on_selectModeBox_activated(int index)
       currentObject->setMode(mode);
       objs.emplace_back(currentObject);
       break;
-    case 8:
-      currentObject = std::make_shared<Curve>();
-      mode          = std::make_shared<BezierMode>(currentObject);
-      currentObject->setMode(mode);
-      objs.emplace_back(currentObject);
-      break;
-    case 9:
-      currentObject = std::make_shared<Curve>();
-      mode          = std::make_shared<VSplineMode>(currentObject);
-      currentObject->setMode(mode);
-      objs.emplace_back(currentObject);
-      break;
   }
 }
 

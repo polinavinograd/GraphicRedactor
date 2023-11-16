@@ -27,13 +27,6 @@ Matrix::Matrix(std::vector<std::vector<double>> matrix)
   }
 }
 
-Matrix::Matrix(const std::vector<double>& data)
-    : data({ data })
-    , rows(1)
-    , cols(data.size())
-{
-}
-
 Matrix Matrix::operator*(const Matrix& right) const
 {
   if (cols != right.rows)
@@ -43,11 +36,11 @@ Matrix Matrix::operator*(const Matrix& right) const
 
   Matrix result = Matrix(rows, right.cols);
 
-  for (int row = 0; row < rows; row++)
+  for (int row = 0; row < rows; ++row)
   {
-    for (int column = 0; column < right.cols; column++)
+    for (int column = 0; column < right.cols; ++column)
     {
-      for (int el = 0; el < cols; el++)
+      for (int el = 0; el < cols; ++el)
       {
         result.data[row][column] += data[row][el] * right.data[el][column];
       }

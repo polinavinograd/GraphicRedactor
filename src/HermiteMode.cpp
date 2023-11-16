@@ -6,40 +6,54 @@
 const int POINT_MULTIPLICATOR = 10;
 
 HermiteMode::HermiteMode(std::shared_ptr<DrawableObject> currentObject)
-    : CurveMode(currentObject)
+    : curveObject(std::dynamic_pointer_cast<Curve>(currentObject))
 {
-  mainMatrix = Matrix({ { 2., -2., 1., 1. },
-                        { -3., 3., -2., -1. },
-                        { 0., 0., 1., 0. },
-                        { 1., 0., 0., 0. } });
 }
 
-std::vector<std::shared_ptr<Point>> HermiteMode::manageInputPoints()
+void HermiteMode::setPoints(const Point &newStartPoint, const Point &newEndPoint, const Point& newStartPointTangent, const Point& newEndPointTangent)
 {
-  std::shared_ptr<Curve> curve = std::dynamic_pointer_cast<Curve>(curveObject);
-  std::vector<std::shared_ptr<Point>> points     = curve->getInputPoints();
-  Point                               startPoint = *points[0].get();
+    auto startPointTangent = newStartPointTangent - newStartPoint;
+    auto endPointTangent = newEndPointTangent - newEndPoint;
 
-  for (int i = 0; i < points.size(); i++)
+    multiplicateMatrix = Matrix(
+        {
+            {static_cast<double>(newStartPoint.x()),     static_cast<double>(newStartPoint.y())},
+            {static_cast<double>(newEndPoint.x()),       static_cast<double>(newEndPoint.y())},
+            {static_cast<double>(startPointTangent.x()), static_cast<double>(startPointTangent.y())},
+            {static_cast<double>(endPointTangent.x()),   static_cast<double>(endPointTangent.y())}
+        });
+}
+
+Point HermiteMode::getPoint(double time) const
+{
+  auto mulMatrix = Matrix({ std::pow(time, 3), std::pow(time, 2), time, 1 });
+  auto result = (mulMatrix * hermiteMatrix * multiplicateMatrix).getData()[0];
+  return Point(result[0], result[1]);
+}
+
+std::vector<Point> HermiteMode::calculatePoints()
+{
+  std::vector<Point> points;
+  auto refPoints = curveObject->getInputPoints();
+  Point startPoint = *refPoints[0].get();
+
+  for (int i = 0; i < refPoints.size(); ++i)
   {
-    points[i] = std::make_shared<Point>(points[i]->x() - startPoint.x(),
-                                        startPoint.y() - points[i]->y());
+      points.emplace_back(refPoints[i]->x() - startPoint.x(), startPoint.y() - refPoints[i]->y());
   }
-  return points;
-}
 
-Matrix HermiteMode::setGeometryVector(
-    int pointNumber, std::vector<std::shared_ptr<Point>> points)
-{
-  Matrix hermiteGeometryVector = Matrix(
-      { { double(points[pointNumber]->x()), double(points[pointNumber]->y()) },
-        { double(points[pointNumber + 3]->x()),
-          double(points[pointNumber + 3]->y()) },
-        { double(points[pointNumber + 1]->x() - points[pointNumber]->x()),
-          double(points[pointNumber + 1]->y() - points[pointNumber]->y()) },
-        { double(points[pointNumber + 3]->x() - points[pointNumber + 2]->x()),
-          double(points[pointNumber + 3]->y() -
-                 points[pointNumber + 2]->y()) } });
+  // Actual method
+  setPoints(points[0], points[1], points[2], points[3]);
 
-  return hermiteGeometryVector;
+  std::vector<Point> result;
+
+  auto delta = points[0] - points[1];
+  int maxTime = std::max(std::abs(delta.x()), std::abs(delta.y())) * POINT_MULTIPLICATOR + 1000;
+
+  for (int time = 0; time <= maxTime; time++)
+  {
+      result.emplace_back((getPoint((double)(time)/maxTime) - points[3]).toScreenPoint(*refPoints[0].get()));
+  }
+
+  return result;
 }

@@ -40,6 +40,7 @@ class MainWindow : public QMainWindow
   private:
   std::shared_ptr<DrawableObject>              currentObject;
   std::vector<std::shared_ptr<DrawableObject>> objs;
+  std::vector<std::shared_ptr<QPoint>> pts;
   std::shared_ptr<Mode>                        mode;
   Ui::MyGraphicRedactor*                       ui;
 };
