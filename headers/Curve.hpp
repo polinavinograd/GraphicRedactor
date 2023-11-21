@@ -11,6 +11,7 @@ class Curve : public DrawableObject
   Curve() = default;
   bool                                tryFinish(Point point) override;
   std::vector<std::shared_ptr<Point>> getInputPoints();
+  void                                setPoints() override final;
 
   protected:
   std::vector<std::shared_ptr<Point>> inputPoints;

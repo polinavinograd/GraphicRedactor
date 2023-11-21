@@ -1,4 +1,6 @@
 #include "../headers/DrawableObject.hpp"
+#include <memory>
+#include <vector>
 
 void DrawableObject::setMode(std::shared_ptr<Mode> mode)
 {

@@ -16,3 +16,5 @@ bool Line::tryFinish(Point point)
   }
   return true;
 }
+
+void Line::setPoints() {}

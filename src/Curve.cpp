@@ -1,10 +1,23 @@
 #include "../headers/Curve.hpp"
 #include "../headers/VSplineMode.hpp"
+#include <iostream>
 #include <memory>
 
 std::vector<std::shared_ptr<Point>> Curve::getInputPoints()
 {
   return inputPoints;
+}
+
+void Curve::setPoints()
+{
+  start       = std::make_shared<Point>(139, 334);
+  end         = std::make_shared<Point>(404, 358);
+  inputPoints = { start,
+                  std::make_shared<Point>(210, 185),
+                  std::make_shared<Point>(373, 185),
+                  end };
+  points      = mode->calculatePoints();
+  std::cout << points.size() << std::endl;
 }
 
 bool Curve::tryFinish(Point point)

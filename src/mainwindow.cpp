@@ -119,6 +119,7 @@ void MainWindow::on_selectModeBox_activated(int index)
       currentObject = std::make_shared<Curve>();
       mode          = std::make_shared<HermiteMode>(currentObject);
       currentObject->setMode(mode);
+      currentObject->setPoints();
       objs.emplace_back(currentObject);
       break;
     case 8:

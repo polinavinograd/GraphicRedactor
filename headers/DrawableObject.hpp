@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Mode.hpp"
+#include "Point.hpp"
 
 #include <QPainter>
 #include <memory>
@@ -16,6 +17,7 @@ class DrawableObject
   void                   setFinished();
   std::shared_ptr<Point> getStart();
   std::shared_ptr<Point> getEnd();
+  virtual void           setPoints() = 0;
 
   protected:
   std::shared_ptr<Mode>  mode;

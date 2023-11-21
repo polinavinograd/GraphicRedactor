@@ -20,11 +20,11 @@ std::vector<std::shared_ptr<Point>> HermiteMode::manageInputPoints()
   std::vector<std::shared_ptr<Point>> points     = curve->getInputPoints();
   Point                               startPoint = *points[0].get();
 
-  // for (int i = 0; i < points.size(); i++)
-  // {
-  //   points[i] = std::make_shared<Point>(points[i]->x() - startPoint.x(),
-  //                                       startPoint.y() - points[i]->y());
-  // }
+  for (int i = 0; i < points.size(); i++)
+  {
+    points[i] = std::make_shared<Point>(points[i]->x() - startPoint.x(),
+                                        startPoint.y() - points[i]->y());
+  }
   return points;
 }
 

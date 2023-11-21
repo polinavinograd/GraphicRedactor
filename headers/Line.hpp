@@ -12,5 +12,7 @@ class Line : public DrawableObject
   public:
   Line() = default;
   bool tryFinish(Point point) override;
+  void setPoints() override final;
+
   // void draw(QPainter& painter) override;
 };
