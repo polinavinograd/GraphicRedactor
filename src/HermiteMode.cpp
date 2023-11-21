@@ -33,26 +33,46 @@ Point HermiteMode::getPoint(double time) const
 
 std::vector<Point> HermiteMode::calculatePoints()
 {
-  std::vector<Point> points;
-  auto refPoints = curveObject->getInputPoints();
-  Point startPoint = *refPoints[0].get();
+  std::vector<std::shared_ptr<Point>> points = curveObject->getInputPoints();
 
-  for (int i = 0; i < refPoints.size(); ++i)
+  Point startPoint = *points[0].get();
+
+  for (int i = 0; i < points.size(); i++)
   {
-      points.emplace_back(refPoints[i]->x() - startPoint.x(), startPoint.y() - refPoints[i]->y());
+      points[i] = std::make_shared<Point>(points[i]->x() - startPoint.x(),
+                                          startPoint.y() - points[i]->y());
   }
 
-  // Actual method
-  setPoints(points[0], points[1], points[2], points[3]);
+  hermiteGeometryVector =
+      Matrix({ { double(points[0]->x()), double(points[0]->y()) },
+              { double(points[3]->x()), double(points[3]->y()) },
+              { double(points[1]->x() - points[0]->x()),
+               double(points[1]->y() - points[0]->y()) },
+              { double(points[3]->x() - points[2]->x()),
+               double(points[3]->y() - points[2]->y()) } });
 
   std::vector<Point> result;
+  Matrix polynom = (hermiteMatrix * hermiteGeometryVector);
+  std::vector<std::vector<double>> data = polynom.getData();
 
-  auto delta = points[0] - points[1];
-  int maxTime = std::max(std::abs(delta.x()), std::abs(delta.y())) * POINT_MULTIPLICATOR + 1000;
+   for (double t = points[0]->x(); t <= points[3]->x(); t += 0.001)
+   {
+     std::vector<double> interpolationRow;
+     for (int i = 0; i < data.size(); i++)
+     {
+       double res         = 0;
+       double multiplying = 1;
 
-  for (int time = 0; time <= maxTime; time++)
-  {
-      result.emplace_back((getPoint((double)(time)/maxTime) - points[3]).toScreenPoint(*refPoints[0].get()));
+      for (int j = data[i].size(); j > -1; j--)
+      {
+        res += multiplying * data[i][j];
+        multiplying *= t;
+      }
+
+      interpolationRow.emplace_back(static_cast<int>(res));
+    }
+
+    result.emplace_back(Point(interpolationRow[0], interpolationRow[1]).toScreenPoint(startPoint));
   }
 
   return result;
