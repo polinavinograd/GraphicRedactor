@@ -2,11 +2,11 @@
 
 const int POINT_MULTIPLICATOR = 10;
 
-Point CurveMode::getPoint(double time, Matrix multiplicateMatrix) const
+Point CurveMode::getPoint(double time) const
 {
   auto mulMatrix = Matrix({ std::pow(time, 3), std::pow(time, 2), time, 1 });
-  auto result    = (mulMatrix * mainMatrix * multiplicateMatrix).getData()[0];
-  return { std::abs((int)result[0]), std::abs((int)result[1]) };
+  auto result    = (mulMatrix * mainMatrix * geometryVector).getData()[0];
+  return Point((int)result[0], (int)result[1]);
 }
 
 std::vector<Point> CurveMode::calculatePoints()
@@ -25,7 +25,7 @@ std::vector<Point> CurveMode::calculatePoints()
 
     for (int time = 0; time <= maxTime; time++)
     {
-      result.emplace_back(getPoint((double)(time) / maxTime, geometryVector) -
+      result.emplace_back(getPoint((double)(time) / maxTime) -
                           points[i + 3].get()->toScreenPoint(*points[i].get()));
     }
   }

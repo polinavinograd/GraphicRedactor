@@ -35,11 +35,14 @@ Matrix HermiteMode::setGeometryVector(
       { { double(points[pointNumber]->x()), double(points[pointNumber]->y()) },
         { double(points[pointNumber + 3]->x()),
           double(points[pointNumber + 3]->y()) },
-        { double(points[pointNumber + 1]->x() - points[pointNumber]->x()),
-          double(points[pointNumber + 1]->y() - points[pointNumber]->y()) },
-        { double(points[pointNumber + 2]->x() - points[pointNumber + 3]->x()),
-          double(points[pointNumber + 2]->y() -
-                 points[pointNumber + 3]->y()) } });
+        { std::abs(
+              double(points[pointNumber + 1]->x() - points[pointNumber]->x())),
+          std::abs(double(points[pointNumber + 1]->y() -
+                          points[pointNumber]->y())) },
+        { std::abs(double(points[pointNumber + 2]->x() -
+                          points[pointNumber + 3]->x())),
+          std::abs(double(points[pointNumber + 2]->y() -
+                          points[pointNumber + 3]->y())) } });
 
   return hermiteGeometryVector;
 }
