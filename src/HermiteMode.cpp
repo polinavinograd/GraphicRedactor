@@ -31,48 +31,33 @@ Point HermiteMode::getPoint(double time) const
   return Point(result[0], result[1]);
 }
 
+Point hermite(float t, Point P1, Point P2, Point R1, Point R2)
+{
+  float h1 = 2 * pow(t, 3) - 3 * pow(t, 2) + 1;
+  float h2 = -2 * pow(t, 3) + 3 * pow(t, 2);
+  float h3 = pow(t, 3) - 2 * pow(t, 2) + t;
+  float h4 = pow(t, 3) - pow(t, 2);
+
+  int x = h1 * P1.x() + h2 * P2.x() + h3 * R1.x() + h4 * R2.x();
+  int y = h1 * P1.y() + h2 * P2.y() + h3 * R1.y() + h4 * R2.y();
+
+  return Point(x, y);
+}
+
 std::vector<Point> HermiteMode::calculatePoints()
 {
-  std::vector<std::shared_ptr<Point>> points = curveObject->getInputPoints();
+  auto data = curveObject->getInputPoints();
 
-  Point startPoint = *points[0].get();
-
-  for (int i = 0; i < points.size(); i++)
-  {
-      points[i] = std::make_shared<Point>(points[i]->x() - startPoint.x(),
-                                          startPoint.y() - points[i]->y());
-  }
-
-  hermiteGeometryVector =
-      Matrix({ { double(points[0]->x()), double(points[0]->y()) },
-              { double(points[3]->x()), double(points[3]->y()) },
-              { double(points[1]->x() - points[0]->x()),
-               double(points[1]->y() - points[0]->y()) },
-              { double(points[3]->x() - points[2]->x()),
-               double(points[3]->y() - points[2]->y()) } });
+  Point P1 = *data[0].get();
+  Point P2 = *data[3].get();
+  Point R1 = *data[1].get();
+  Point R2 = *data[2].get();
 
   std::vector<Point> result;
-  Matrix polynom = (hermiteMatrix * hermiteGeometryVector);
-  std::vector<std::vector<double>> data = polynom.getData();
-
-   for (double t = points[0]->x(); t <= points[3]->x(); t += 0.001)
-   {
-     std::vector<double> interpolationRow;
-     for (int i = 0; i < data.size(); i++)
-     {
-       double res         = 0;
-       double multiplying = 1;
-
-      for (int j = data[i].size(); j > -1; j--)
-      {
-        res += multiplying * data[i][j];
-        multiplying *= t;
-      }
-
-      interpolationRow.emplace_back(static_cast<int>(res));
-    }
-
-    result.emplace_back(Point(interpolationRow[0], interpolationRow[1]).toScreenPoint(startPoint));
+  for (float t = 0; t <= 1; t += 0.001)
+  {
+      Point p = hermite(t, P1, P2, R1, R2);
+      result.emplace_back(p);
   }
 
   return result;
