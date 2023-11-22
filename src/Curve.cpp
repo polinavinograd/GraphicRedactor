@@ -17,6 +17,10 @@ void Curve::setPoints()
                   std::make_shared<Point>(373, 185),
                   end };
   points      = mode->calculatePoints();
+  for (auto& point : points)
+  {
+    point = { point.x() + start->x(), start->y() - point.y() };
+  }
   std::cout << points.size() << std::endl;
 }
 

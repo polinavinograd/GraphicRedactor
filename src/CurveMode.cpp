@@ -25,8 +25,7 @@ std::vector<Point> CurveMode::calculatePoints()
 
     for (int time = 0; time <= maxTime; time++)
     {
-      result.emplace_back(getPoint((double)(time) / maxTime) -
-                          points[i + 3].get()->toScreenPoint(*points[i].get()));
+      result.emplace_back(getPoint((double)(time) / maxTime));
     }
   }
 

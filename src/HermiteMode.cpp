@@ -31,18 +31,16 @@ std::vector<std::shared_ptr<Point>> HermiteMode::manageInputPoints()
 Matrix HermiteMode::setGeometryVector(
     int pointNumber, std::vector<std::shared_ptr<Point>> points)
 {
-  Matrix hermiteGeometryVector = Matrix(
-      { { double(points[pointNumber]->x()), double(points[pointNumber]->y()) },
-        { double(points[pointNumber + 3]->x()),
-          double(points[pointNumber + 3]->y()) },
-        { std::abs(
-              double(points[pointNumber + 1]->x() - points[pointNumber]->x())),
-          std::abs(double(points[pointNumber + 1]->y() -
-                          points[pointNumber]->y())) },
-        { std::abs(double(points[pointNumber + 2]->x() -
-                          points[pointNumber + 3]->x())),
-          std::abs(double(points[pointNumber + 2]->y() -
-                          points[pointNumber + 3]->y())) } });
+  auto start       = *points[pointNumber];
+  auto end         = *points[pointNumber + 3];
+  auto startVector = *points[pointNumber + 1] - start;
+  auto endVector   = *points[pointNumber + 2] - end;
+
+  Matrix hermiteGeometryVector =
+      Matrix({ { (double)start.x(), (double)start.y() },
+               { (double)end.x(), (double)end.y() },
+               { (double)startVector.x(), (double)startVector.y() },
+               { (double)endVector.x(), (double)endVector.y() } });
 
   return hermiteGeometryVector;
 }
